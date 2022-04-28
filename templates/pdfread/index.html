@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+    {% block con %}
+
+<div class="container mt-5 mb-5">
+    <h1><b>PDF 리더기</b></h1>
+
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="row mt-5">
+            <div class="col-lg-10">
+                <input name="pdf" type="file" class="form-control">
+            </div>
+            <div class="col-lg-2">
+                <button class="btn btn-dark">변환</button>
+            </div>
+        </div>
+    </form>
+    <div class="row">
+        <div class="col-lg-11">
+            <textarea class="form-control mt-3" style="height: 700px;" disabled>{{st}}</textarea>
+        </div>
+        <div class="col-lg-1"></div>
+    </div>
+</div>
+    {% endblock %}

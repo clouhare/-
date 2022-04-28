@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+    {% block con %}
+        
+        <div class="mt-5 container">
+
+            <h1><b>번역기</b></h1>
+
+            {% for key, value in d.items %}
+            {{key}} {{value}}
+            {% endfor %}
+            <form method="POST">
+                {% csrf_token %}
+                <div class="row mt-5">
+                    <div class="col-lg-5">
+                        <textarea class="form-control" style="height: 300px; font-size: 15px; font-weight: bold;" name="btext">{{text}}</textarea>
+                    </div>
+                    <div class="text-center col-lg-2" style="margin: auto;">
+                        <select name="bcate" class="form-select" multiple aria-label="multiple select example">
+                            {% for code, name in ndict.items %}
+                            <option value="{{code}}" {% if bcate %}{% if bcate == code %} selected {% endif %}{% else %}{% if code == 'ko' %}selected{% endif %}{% endif %}>{{name | upper}}</option>
+                            {% endfor %}
+                        </select>
+                        <div class="mt-3 mb-3">
+                        <button class="btn btn-dark">번역</button>
+                        </div>
+                        <select name="lcate" class="form-select" multiple aria-label="multiple select example">
+                            {% for code, name in ndict.items %}
+                            <option value="{{code}}" {% if lcate %}{% if lcate == code %} selected {% endif %}{% else %}{% if code == 'en' %}selected{% endif %}{% endif %}>{{name | upper}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-lg-5">
+                        <textarea disabled class="form-control" style="height: 300px;font-size: 15px; font-weight: bold;">{{af}}</textarea>
+                    </div>
+                    </div>
+            </form>
+        </div>
+    {% endblock %}
